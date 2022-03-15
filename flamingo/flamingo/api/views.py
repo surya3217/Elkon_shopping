@@ -21,16 +21,14 @@ def insert(request):
         value = request.query_params.get("value")
         print(time, value)
         if request.method == "GET":
-            entry = Value.objects.filter(timestamp= time, value= value).first()
-            if entry:
-                return Response({'message':'data already exist'})
-            else:
-                obj= Value.objects.create(
-                    value= value,
-                    timestamp= time
+            entry, created= Value.objects.get_or_create(
+                value= value,
+                timestamp= time
                 )
-                obj.save()
+            if created: # True
                 return Response({'message':'added successfully'})
+            
+            return Response({'message':'data already exist'})
     except Exception as e:
         return Response({'error':str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
