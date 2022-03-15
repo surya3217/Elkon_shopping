@@ -8,5 +8,6 @@
 <li>get api endpoints: </li>
 <li> /api/insert?timestamp={}&value={}</li>
 <li> /api/graph</li>
+<li> Test the endpoints with desired value using "api/tests.py"</li>
 
 </ol>
